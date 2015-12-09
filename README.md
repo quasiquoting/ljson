@@ -1,6 +1,7 @@
 # ljson
+[![Build Status](https://travis-ci.org/quasiquoting/ljson.svg)](https://travis-ci.org/quasiquoting/ljson)
 
-<a href="http://dropr.com/coenhamelink/15218/jason_and_the_argonauts/+?p=97582"><img src="resources/images/jason-argonauts-small.png" /></a>
+[![Argonauts](resources/images/jason-argonauts-small.png)](http://dropr.com/coenhamelink/15218/jason_and_the_argonauts/+?p=97582)
 
 ## Introduction
 
