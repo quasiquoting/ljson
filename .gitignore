@@ -8,3 +8,6 @@ ebin/*
 bin/expm
 *.dump
 .rebar
+_*
+rebar.lock
+.DS_Store

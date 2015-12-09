@@ -21,14 +21,14 @@ Just add it to your ``rebar.config`` deps:
   {deps, [
     ...
     {ljson, ".*",
-      {git, "git@github.com:lfex/ljson.git", "master"}}
+      {git, "git@github.com:quasiquoting/ljson.git", {tag "0.4.0"}}}
       ]}.
 ```
 
 And then do the usual:
 
 ```bash
-    $ make compile
+    $ rebar3 compile
 ```
 
 
@@ -37,18 +37,17 @@ And then do the usual:
 The following usage examples are all done from the LFE REPL:
 
 ```
-$ make repl-no-deps
-Starting an LFE REPL ...
-Erlang/OTP 17 [erts-6.2] [source] [64-bit] [smp:4:4] [async-threads:10] ...
+$ lfe -pa _build/default/deps/*/ebin
+Erlang/OTP 18 [erts-7.1] [source] [64-bit] [smp:8:8] [async-threads:10] ...
 
-LFE Shell V6.2 (abort with ^G)
+LFE Shell V7.1 (abort with ^G)
 >
 ```
 
 
 Encode simple LFE data to JSON:
 
-```cl
+```lfe
 > (ljson:print (ljson:encode 'a))
 <<"\"a\"">>
 ok
@@ -76,7 +75,7 @@ ok
 
 Decode simple JSON:
 
-```cl
+```lfe
 > (ljson:print (ljson:decode #b("\"a\"")))
 <<"a">>
 ok
@@ -116,7 +115,7 @@ Decode a JSON data structure (note that, for formatting purposes, the data
 below has been presented separated with newlines; this won't work in the
 LFE REPL -- you'll need to put it all on one line):
 
-```cl
+```lfe
 > (set json-data "{
   \"First Name\": \"JÃ³n\",
   \"Last Name\": \"ÃÃ³rson\",
@@ -184,7 +183,7 @@ ok
 
 Now let's take it full circle by encoding it again:
 
-```cl
+```lfe
 > (ljson:prettify (ljson:encode data))
 {
   "First Name": "Jón",
@@ -217,7 +216,7 @@ ok
 
 Let's do the same, but this time from LFE data:
 
-```cl
+```lfe
 > (set lfe-data
    `(#(#b("First Name") ,(binary ("Jón" utf8)))
      #(#b("Last Name") ,(binary ("Þórson" utf8)))
@@ -268,7 +267,7 @@ ok
 Extract elements from the original converted data structure as well as
 our LFE data structure we just entered directly, above:
 
-```cl
+```lfe
 > (ljson:print (ljson:get '("First Name") data))
 <<"Jón"/utf8>>
 ok
@@ -291,7 +290,7 @@ ok
 
 You may also use atom or binary keys:
 
-```cl
+```lfe
 > (ljson:print (ljson:get '(|Phone Numbers| 1 Number) lfe-data))
 <<"20 60 30">>
 ok
@@ -302,7 +301,7 @@ ok
 
 Extract elements directly from JSON:
 
-```cl
+```lfe
 > (ljson:print (ljson:get '("First Name") json-data #(json)))
 <<"\"J\\u00c3\\u00b3n\"">>
 ok
@@ -323,5 +322,3 @@ The Argonauts that are rowing this thing consist of the following:
 * jsx - for decoding, ``prettify`` and ``minify``
 * dict - (wrapped as ``pairs``) for large key/value lists
 * proplists/lists of tuples - for small key/value lists
-
-
